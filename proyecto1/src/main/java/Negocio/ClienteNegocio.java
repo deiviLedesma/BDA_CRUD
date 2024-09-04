@@ -5,8 +5,6 @@
 package Negocio;
 
 import Persistencia.IClienteDAO;
-import Persistencia.PersistenciaException;
-import java.time.LocalDateTime;
 
 /**
  *
@@ -20,15 +18,18 @@ public class ClienteNegocio implements IClienteNegocio {
         this.clienteDAO = clienteDAO;
     }
 
-    @Override
-    public void guardar() throws NegocioException {
-        try {
-            System.out.println("Paso por negocio del cliente" + LocalDateTime.now());
-            this.clienteDAO.guardar();
-        } catch (PersistenciaException ex) {
-            throw new NegocioException(ex.getMessage());
-        }
-
-    }
-
+    /**
+     * @Override public void guardar() throws NegocioException { try {
+     * System.out.println("Paso por negocio del cliente" + LocalDateTime.now());
+     * this.clienteDAO.guardar(); } catch (PersistenciaException ex) { throw new
+     * NegocioException(ex.getMessage()); }
+     *
+     *
+     * }
+     * //
+     *
+     *
+     * }
+     *
+     */
 }

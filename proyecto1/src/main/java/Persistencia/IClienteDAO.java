@@ -12,13 +12,12 @@ import Dominio.Cliente;
  */
 public interface IClienteDAO {
 
-    void guardar() throws PersistenciaException;
 
     void insertar(Cliente cliente) throws PersistenciaException;
 
-    void eliminar() throws PersistenciaException;
+    void eliminar(int id) throws PersistenciaException;
 
-    void modificar() throws PersistenciaException;
+    void actualizar(Cliente cliente) throws PersistenciaException;
 
     void leer() throws PersistenciaException;
 }

@@ -16,7 +16,7 @@ public class ConexionBD implements IConexion {
 
     // Definimos los parámetros de conexión a la base de datos
     private final String SERVER = "localhost";
-    private final String BASE_DATOS = "practicabda";
+    private final String BASE_DATOS = "proyectobda";
     private final String CADENA_CONEXION = "jdbc:mysql://" + SERVER + "/" + BASE_DATOS;
     private final String USUARIO = "root";
     private final String CONTRASEÑA = "Inunanash1";

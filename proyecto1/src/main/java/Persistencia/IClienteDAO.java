@@ -15,9 +15,9 @@ public interface IClienteDAO {
 
     void insertar(Cliente cliente) throws PersistenciaException;
 
-    void eliminar(int id) throws PersistenciaException;
+    void eliminar(Long id) throws PersistenciaException;
 
     void actualizar(Cliente cliente) throws PersistenciaException;
 
-    void leer() throws PersistenciaException;
+    Cliente leer(Long idCliente) throws PersistenciaException;
 }

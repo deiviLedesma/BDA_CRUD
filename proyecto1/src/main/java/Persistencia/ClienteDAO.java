@@ -7,6 +7,7 @@ package Persistencia;
 import Dominio.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -29,16 +30,16 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public void insertar(Cliente cliente) throws PersistenciaException {
         //query de la base de datos
-        String query = "INSERT INTO Clientes (nombre, apellidoP, apellidoM, telefono) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Cliente (nombre, apellidoPaterno, apellidoMaterno, estaEliminado) VALUES (?, ?, ?, ?)";
         //intenta establecer la conexion con la base de datos y ejecuta el query
         try(Connection con = conexionBD.crearConexion();
                 PreparedStatement ps = con.prepareStatement(query)){
             //se establecen los datos del query
-           ps.setString(1, cliente.getNombre());
-           ps.setString(2, cliente.getApellidoP());
-           ps.setString(3, cliente.getApellidoM());
-           ps.setString(4, cliente.getTelefono());
-           ps.executeUpdate(); //manda y actualiza la informacion a la base de datos
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getApellidoPaterno());
+            ps.setString(3, cliente.getApellidoMaterno());
+            ps.setBoolean(4, cliente.isEstaEliminado());
+            ps.executeUpdate(); //manda y actualiza la informacion a la base de datos
             
         } catch (SQLException ex) {
             throw new PersistenciaException("Error al crear el Cliente");
@@ -52,9 +53,9 @@ public class ClienteDAO implements IClienteDAO {
      * @throws PersistenciaException 
      */
     @Override
-    public void eliminar(int id) throws PersistenciaException {
+    public void eliminar(Long id) throws PersistenciaException {
         //query de la base de datos
-        String query = "DELETE FROM Clientes WHERE idCliente = ?";
+        String query = "DELETE FROM Cliente WHERE idcliente = ?";
         //intenta establecer la conexion con la base de datos y ejecuta el query
         try(Connection con = conexionBD.crearConexion();
                 PreparedStatement ps = con.prepareStatement(query)){
@@ -75,14 +76,14 @@ public class ClienteDAO implements IClienteDAO {
      */
     @Override
     public void actualizar(Cliente cliente) throws PersistenciaException {
-        String query = "UPDATE Clientes SET nombre = ?, apellidoP = ?, apellidoM = ?, telefono = ? WHERE idCliente = ?";
+        String query = "UPDATE Cliente SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, estaElimnado = ? WHERE idcliente = ?";
         try(Connection con = conexionBD.crearConexion();
                 PreparedStatement ps = con.prepareStatement(query)){
             
             ps.setString(1, cliente.getNombre());
-            ps.setString(2, cliente.getApellidoP());
-            ps.setString(3, cliente.getApellidoM());
-            ps.setString(4, cliente.getTelefono());
+            ps.setString(2, cliente.getApellidoPaterno());
+            ps.setString(3, cliente.getApellidoMaterno());
+            ps.setBoolean(4, cliente.isEstaEliminado());
             ps.executeUpdate();
             
         }catch(SQLException e){
@@ -91,8 +92,37 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public void leer() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cliente leer(Long idCliente) throws PersistenciaException {
+        String query = "SELECT idcliente, nombre, apellidoPaterno, apellidoMaterno, estaEliminado, fechaHoraRegistro";
+        ResultSet rs = null;
+        try(Connection con = conexionBD.crearConexion();
+                PreparedStatement ps = con.prepareStatement(query)){
+            ps.setLong(1, idCliente);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                 // Crear un objeto Cliente con los datos obtenidos
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(rs.getLong("idcliente"));
+                cliente.setNombre(rs.getString("nombres"));
+                cliente.setApellidoPaterno(rs.getString("apellidoPaterno"));
+                cliente.setApellidoMaterno(rs.getString("apellidoMaterno"));
+                cliente.setEstaEliminado(rs.getBoolean("estaEliminado"));
+                cliente.setFechaHoraRegistro(rs.getTimestamp("fechaHoraRegistro").toLocalDateTime());
+
+                return cliente; // Devolver el cliente encontrado
+            }
+            else{ 
+                return null;
+            }
+        }catch(SQLException e){
+            throw new PersistenciaException("Error al leer el cliente");
+        }finally{
+            try{
+                if (rs != null) rs.close();
+            }catch(SQLException e){
+                throw new PersistenciaException("Error al cerrar la conexión");
+            }
+        }
     }
 
 }

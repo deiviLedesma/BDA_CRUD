@@ -4,49 +4,42 @@
  */
 package Dominio;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class Cliente {
 
-    private Long id;
+    private Long idcliente;
     private String nombre;
-    private String apellidoP;
-    private String apellidoM;
-    private String telefono;
-    private String numCasa;
-    private String calle;
-    private String colonia;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private boolean estaEliminado;
+    private LocalDateTime fechaHoraRegistro;
 
+    // Constructor vacío
     public Cliente() {
     }
 
-    public Cliente(Long id, String nombre, String apellidoP, String apellidoM, String telefono, String numCasa, String calle, String colonia) {
-        this.id = id;
+    // Constructor con parámetros
+    public Cliente(Long idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, boolean estaEliminado, LocalDateTime fechaHoraRegistro) {
+        this.idcliente = idCliente;
         this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.telefono = telefono;
-        this.numCasa = numCasa;
-        this.calle = calle;
-        this.colonia = colonia;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.estaEliminado = estaEliminado;
+        this.fechaHoraRegistro = fechaHoraRegistro;
     }
 
-    public Cliente(Long id, String nombre, String apellidoP, String apellidoM, String telefono) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.telefono = telefono;
+    // Getters y Setters
+    public Long getIdCliente() {
+        return idcliente;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCliente(Long idcliente) {
+        this.idcliente = idcliente;
     }
 
     public String getNombre() {
@@ -57,57 +50,48 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellidoP() {
-        return apellidoP;
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
-    public void setApellidoP(String apellidoP) {
-        this.apellidoP = apellidoP;
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
     }
 
-    public String getApellidoM() {
-        return apellidoM;
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
     }
 
-    public void setApellidoM(String apellidoM) {
-        this.apellidoM = apellidoM;
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public boolean isEstaEliminado() {
+        return estaEliminado;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setEstaEliminado(boolean estaEliminado) {
+        this.estaEliminado = estaEliminado;
     }
 
-    public String getNumCasa() {
-        return numCasa;
+    public LocalDateTime getFechaHoraRegistro() {
+        return fechaHoraRegistro;
     }
 
-    public void setNumCasa(String numCasa) {
-        this.numCasa = numCasa;
+    public void setFechaHoraRegistro(LocalDateTime fechaHoraRegistro) {
+        this.fechaHoraRegistro = fechaHoraRegistro;
     }
 
-    public String getCalle() {
-        return calle;
-    }
-
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
-
-    public String getColonia() {
-        return colonia;
-    }
-
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
-    }
-
+    // Método toString para representar al cliente
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", numCasa=" + numCasa + ", calle=" + calle + ", colonia=" + colonia + '}';
+        return "Cliente{"
+                + "idCliente=" + idcliente
+                + ", nombre='" + nombre + '\''
+                + ", apellidoPaterno='" + apellidoPaterno + '\''
+                + ", apellidoMaterno='" + apellidoMaterno + '\''
+                + ", estaEliminado=" + estaEliminado
+                + ", fechaHoraRegistro=" + fechaHoraRegistro
+                + '}';
     }
-
 }

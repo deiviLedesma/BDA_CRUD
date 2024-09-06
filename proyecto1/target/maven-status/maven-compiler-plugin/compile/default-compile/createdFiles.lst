@@ -1,7 +1,17 @@
 utilerias\JButtonRenderer.class
+Dominio\Activista.class
+Negocio\ClienteNegocio.class
 Test\Test.class
 utilerias\Utilidades.class
+Persistencia\IConexion.class
+Persistencia\PersistenciaException.class
 utilerias\ComboItems.class
 com\mycompany\crudprimeraunidad\CRUDCliente.class
+Persistencia\ClienteDAO.class
+Persistencia\IClienteDAO.class
+Negocio\IClienteNegocio.class
+Dominio\Cliente.class
+Persistencia\ConexionBD.class
 utilerias\JButtonCellEditor.class
 utilerias\JButtonCell.class
+Negocio\NegocioException.class
